@@ -6,6 +6,7 @@ import WeatherCard from "./components/WeatherCard";
 import ForecastCard from "./components/ForecastCard";
 import Footer from "./components/Footer";
 
+
 function App() {
   return (
     <main className="container">

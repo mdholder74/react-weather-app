@@ -1,4 +1,6 @@
 import React from 'react'
+import { useEffect, useState } from 'react'
+import WeatherCard from './WeatherCard'
 import clear_icon from '../assets/clear.png'
 import cloudy_icon from '../assets/cloudy.png'
 import drizzle_icon from '../assets/drizzle.png'
@@ -12,15 +14,14 @@ export default function ForecastCard() {
   return (
     <div className="forecast-card">
     <div className="forecast-card-header">
-      <p>23</p>
-      <p>Thursday</p>
+      <p>{new Date().toLocaleDateString()}</p> 
+      <p>{new Date().toLocaleDateString('en-US', { weekday: 'long' })}</p> 
     </div>
     <div>
-      {/* <img src={clear_icon} alt="Weather Icon" /> */}
-      <img src="" alt="Additional Weather Icon" />
-      <p>95°</p>
-      <p>60°</p>
-      <p>Mostly Cloudy</p>
+      <img src={weatherData.icon} alt="Weather Icon" />
+      <p>{weatherData.tempMax}</p>
+      <img src={weatherData.icon} alt="Weather Icon" />
+      <p>{weatherData.tempMin}</p>
     </div>
   </div>
   )

@@ -40,6 +40,8 @@ export default function WeatherCard({ title }) {
       setWeatherData({
         location: data.name,
         temp: Math.floor(data.main.temp),
+        tempMax: Math.floor(data.main.temp_max),
+        tempMin: Math.floor(data.main.temp_min),
         feels_like: data.main.feels_like,
         humidity: data.main.humidity,
         wind_speed: data.wind.speed,
@@ -68,7 +70,7 @@ useEffect(() => {
             <p>{weatherData.name}</p>
           </div>
           <div className="weather-card-data">
-            {/* <img src={cloudy_icon} alt="Weather Icon" /> */}
+            <img src={weatherData.icon} alt="Weather Icon" />
             <h2>{weatherData.temp}°</h2>
             <p>Feels Like {weatherData.feels_like}°</p>
           </div>

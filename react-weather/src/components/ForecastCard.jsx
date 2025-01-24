@@ -41,8 +41,8 @@ export default function ForecastCard() {
         </div>
         <div>
           <p>{weatherData.location}</p>
-          <p>{weatherData.tempMax}°</p>
-          <p>{weatherData.tempMin}°</p>
+          <p>High of {weatherData.tempMax}°</p>
+          <p>Low of{weatherData.tempMin}°</p>
         </div>
       </div>
     );

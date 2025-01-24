@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-
+import SearchBar from './SearchBar';
 
 const VITE_APP_ID = import.meta.env.VITE_APP_ID || "0ba97a7a56972e55c9def754764a16fc";
 
@@ -40,10 +40,11 @@ export default function WeatherCard({ title }) {
   return (
     <div className="weather-card">
       <h2>{title}</h2>
+      <SearchBar search={search} />
+
       {title === "Weather Data" && weatherData && (
         <>
           <div className="weather-card-data">
-            <p>Current Weather</p>
             <p>{weatherData.location}</p>
           </div>
           <div className="weather-card-data">

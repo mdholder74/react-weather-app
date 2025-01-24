@@ -6,11 +6,13 @@ const VITE_APP_ID = import.meta.env.VITE_APP_ID || "0ba97a7a56972e55c9def754764a
 
 
 export default function WeatherCard({ title }) {
+
   const [weatherData, setWeatherData] = useState(null);
 
   const search = async (city) => {
     try {
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${VITE_APP_ID}`;
+
       const response = await fetch(url);
       const data = await response.json();
 
@@ -59,7 +61,7 @@ export default function WeatherCard({ title }) {
             </div>
             <div>
               <p className="updates">Pressure</p>
-              <p>{weatherData.pressure} hPa</p>
+              <p>{weatherData.pressure}</p>
             </div>
           </div>
         </>

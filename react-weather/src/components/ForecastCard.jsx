@@ -1,25 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useState, useEffect } from 'react';
 
 export default function ForecastCard() {
+
   const [weatherData, setWeatherData] = useState(false);
 
-  useEffect(() => {
-    async function fetchWeather() {
+    const fetchWeather = async (city) => {
       try {
         const url = `https://api.openweathermap.org/data/2.5/weather?q=Charlotte&units=imperial&appid=${import.meta.env.VITE_APP_ID}`;
+        
         const response = await fetch(url);
         const data = await response.json();
         setWeatherData({
           location: data.name,
-          tempMax: Math.floor(data.main.temp_max),
-          tempMin: Math.floor(data.main.temp_min),
+          // tempMax: Math.floor(data.main.temp_max),
+          // tempMin: Math.floor(data.main.temp_min),
         });
       } catch (error) {
         console.error(error);
       }
-    }
-    fetchWeather();
-  }, []);
+    };
+
+    useEffect(() =>{
+      fetchWeather("Charlottle")
+    }, [])
+ 
 
     return (
       <div className="forecast-card">
@@ -28,10 +33,8 @@ export default function ForecastCard() {
         <p>{new Date().toLocaleDateString('en-US', { weekday: 'long' })}</p> 
         </div>
         <div>
-          <img src="" alt="Weather Icon" />
-          <img src="" alt="Additional Weather Icon" />
-          <p>{weatherData.tempMax}°</p>
-          <p>{weatherData.tempMin}°</p>
+          {/* <p>{weatherData.tempMax}°</p>
+          <p>{weatherData.tempMin}°</p> */}
         </div>
       </div>
     );

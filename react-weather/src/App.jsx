@@ -10,10 +10,8 @@ function App() {
   return (
     <main className="container">
       <Header />
-      <SearchBar />
       <section className="main-content">
         <WeatherCard title="Weather Data" />
-        <WeatherCard title="Map" />
       </section>
       <section className="forecast-cards">
         <ForecastCard />

@@ -1,49 +1,47 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const VITE_APP_ID = import.meta.env.VITE_APP_ID || "0ba97a7a56972e55c9def754764a16fc";
 
 export default function ForecastCard() {
+  const [forecastData, setForecastData] = useState(null); 
 
-  const [weatherData, setWeatherData] = useState(false);
+  const fetchWeather = async (city) => {
+    try {
+      const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${VITE_APP_ID}`;
+      
+      const response = await fetch(url);
+      const data = await response.json();
 
-    const fetchWeather = async (city) => {
-      try {
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=Charlotte&units=imperial&appid=${VITE_APP_ID}`;
-        
-        const response = await fetch(url);
-        const data = await response.json();
-
-        if (data.cod !== 200) {
-          throw new Error(data.message);
-        }
-
-        setWeatherData({
-          location: data.name,
-          tempMax: Math.floor(data.main.temp_max),
-          tempMin: Math.floor(data.main.temp_min),
-        });
-      } catch (error) {
-        console.error('Error fetching weather data:', error);
+      if (data.cod !== "200") {  
+        throw new Error(data.message);
       }
-    };
 
-    useEffect(() =>{
-      fetchWeather("Charlottle")
-    }, [])
- 
-
-    return (
-      <div className="forecast-card">
-        <div className="forecast-card-header">
-        <p>{new Date().toLocaleDateString()}</p> 
-        <p>{new Date().toLocaleDateString('en-US', { weekday: 'long' })}</p> 
-        </div>
-        <div>
-          <p>{weatherData.location}</p>
-          <p>High of {weatherData.tempMax}°</p>
-          <p>Low of{weatherData.tempMin}°</p>
-        </div>
-      </div>
-    );
+      setForecastData(data.list.slice(0, 5));
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
   };
+
+  useEffect(() => {
+    fetchWeather("Charlotte");
+  }, []);
+
+  return (
+    <div className="forecast-card">
+        <h1>5- DAY WEATHER FORECAST</h1>
+      {forecastData ? (
+        <div className='forecast-details'>
+          {forecastData.map((day, index) => (
+            <div key={index} className="forecast-item">
+              <p>{new Date(day.dt * 1000).toLocaleDateString()}</p>
+              <p>Temp: {Math.floor(day.main.temp)}°</p>
+              <p>Humidity: {day.main.humidity}%</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>Loading forecast data...</p>
+      )}
+    </div>
+  );
+}

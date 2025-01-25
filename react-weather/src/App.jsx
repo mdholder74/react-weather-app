@@ -11,7 +11,7 @@ function App() {
     <main className="container">
       <Header />
       <section className="main-content">
-        <WeatherCard title="Weather Data" />
+        <WeatherCard headingTitle="TODAY'S WEATHER"/>
       </section>
       <section className="forecast-cards">
         <ForecastCard />

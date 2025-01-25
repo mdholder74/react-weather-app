@@ -12,6 +12,7 @@ export default function Header() {
           <li className="nav-item">Hurricanes</li>
           <li className="nav-item">Tornados</li>
           <li className="nav-item">Pollen</li>
+
         </ul>
       </nav>
     </header>
